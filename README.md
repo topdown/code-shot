@@ -1,6 +1,8 @@
 # Code Shot
 Simple Electron desktop app to create nice JPG pictures of code for Instagram and Twitter.
 
+## READ this Full Document and follow the Instructions
+
 This app is just me playing around and learning more about building Electron apps.
 So don't expect to much 😀
 
@@ -74,5 +76,13 @@ There are __key commands__ for using the app or see the __Help menu__.
 * `Option + Enter` to __insert__ the code.
 * `Option + S` to generate and __save an image__ of it.
 
+#### Option+N
+![alt text](https://raw.githubusercontent.com/topdown/code-shot/master/screenshots/alt+n.jpg)
+#### Option+Enter
+![alt text](https://raw.githubusercontent.com/topdown/code-shot/master/screenshots/alt+enter.jpg)
+#### Option+S
+![alt text](https://raw.githubusercontent.com/topdown/code-shot/master/screenshots/alt+s.jpg)
+#### Result
+![alt text](https://raw.githubusercontent.com/topdown/code-shot/master/screenshots/result.jpg)
 Now you can upload to your Instagram.
 
