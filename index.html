@@ -86,31 +86,16 @@
 
 <script type="text/javascript">
 
+	var bg         = Math.floor( Math.random() * 10 ) + 1;
+	var image      = 'url(assets/backgrounds/background' + bg + '.jpg)';
+	var test_image = new Image();
+	test_image.src = image;
 
-	// function getUrlVars() {
-	// 	var vars  = {};
-	// 	var parts = window.location.href.replace( /[?&]+([^=&]+)=([^&]*)/gi, function ( m, key, value ) {
-	// 		vars[ key ] = value;
-	// 	} );
-	// 	return vars;
-	// }
-
-	// function getUrlParam( parameter, defaultvalue ) {
-	// 	var urlparameter = defaultvalue;
-	// 	if ( window.location.href.indexOf( parameter ) > -1 ) {
-	// 		urlparameter = getUrlVars()[ parameter ];
-	// 	}
-	// 	return urlparameter;
-	// }
-	//
-	// var bg = getUrlParam( 'bg', 'null' );
-
-	//if ( bg === null ) {
-	var bg    = Math.floor( Math.random() * 10 ) + 1;
-	//}
-	var image = 'url(assets/backgrounds/background' + bg + '.jpg)';
-
-	document.getElementById( 'page' ).style.backgroundImage = image;
+	if ( test_image.width === 0 ) {
+		// Notification??
+	} else {
+		document.getElementById( 'page' ).style.backgroundImage = image;
+	}
 
 	jQuery( document ).ready( function ( $ ) {
 		document.onkeydown = function ( event ) {
