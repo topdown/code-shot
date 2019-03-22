@@ -13,9 +13,9 @@ cd code-shot
 ```
 
 ### Add Backgrounds
-Before running or building the app you need to add some background images. Wallpapers or something similar in (high) resolution is best.
+__Before running or building__ the app you need to add some background images. Wallpapers or something similar in (high) resolution is best.
 
-Add the background images to `assets/backgrounds/`
+Add your background images to `assets/backgrounds/`
 
 The should be named like the following.
 ```bash
