@@ -2,5 +2,5 @@ node_modules
 release-builds
 OLD.md
 package-lock.json
-assets/backgrounds
+assets/backgrounds/*
 .idea
