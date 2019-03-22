@@ -1,12 +1,12 @@
 {
   "name": "code-shot",
-  "version": "1.0.0",
+  "version": "0.0.1",
   "description": "A simple code snippet screenshot tool for posting to social networks.",
   "main": "main.js",
   "scripts": {
     "start": "electron ."
   },
-  "repository": "",
+  "repository": "https://github.com/topdown/code-shot",
   "keywords": [
     "code",
     "socialcode",

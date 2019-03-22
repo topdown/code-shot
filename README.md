@@ -4,6 +4,8 @@ Simple Electron desktop app to create nice JPG pictures of code for Instagram an
 This app is just me playing around and learning more about building Electron apps.
 So don't expect to much 😀
 
+__This app will mature as I learn Electron's API.__
+
 ## Install / Run
 ```bash
 # Clone this repository

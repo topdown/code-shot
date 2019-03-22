@@ -14,21 +14,15 @@ let mainWindow;
 function createWindow() {
 	// Create the browser window.
 	mainWindow = new BrowserWindow( {
-		//frame: false,
 		width: 1080,
 		height: 1080,
-		//remote: true,
-		//backgroundColor: '#2e2c29',
-		//icon: path.join( __dirname, 'assets/icons/Code-Shot.icns' ),
 		webPreferences: {
 			nodeIntegration: false,
 			javascript: true
 		}
 	} );
-
 	// and load the index.html of the app.
 	mainWindow.loadFile( 'index.html' );
-
 	// Open the DevTools.
 	//mainWindow.webContents.openDevTools();
 
@@ -40,7 +34,6 @@ function createWindow() {
 		mainWindow = null
 	} )
 }
-
 // This method will be called when Electron has finished
 // initialization and is ready to create browser windows.
 // Some APIs can only be used after this event occurs.
