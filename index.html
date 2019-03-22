@@ -1,0 +1,192 @@
+<!doctype html>
+<html lang="en-US">
+<head>
+	<meta charset="UTF-8">
+	<title>Code Shot</title>
+	<link href="assets/style.css" rel="stylesheet" type="text/css">
+	<link href="assets/prism.css" rel="stylesheet" type="text/css">
+
+	<!-- Insert this line above script imports  -->
+	<script>if ( typeof module === 'object' ) {
+		window.module = module;
+		module        = undefined;
+	}</script>
+
+	<!-- normal script imports etc  -->
+	<script type="text/javascript" src="assets/jquery.js"></script>
+	<script type="text/javascript" src="assets/prism.js"></script>
+	<script type="text/javascript" src="assets/html2canvas.min.js"></script>
+	<script type="text/javascript" src="assets/FileSaver.min.js"></script>
+
+	<!-- Insert this line after script imports -->
+	<script>if ( window.module ) module = window.module;</script>
+
+
+	<style type="text/css">
+		pre[class*="language-"] {
+			background:    transparent;
+			padding:       0 1em 0 1em;
+			margin:        0 0 .5em 0;
+			overflow:      hidden;
+			overflow-wrap: break-word;
+			word-break:    break-all;
+		}
+
+		code[class*="language-"] {
+			line-height:   normal;
+			overflow-wrap: break-word;
+			word-break:    break-all;
+		}
+
+		#page {
+			background-repeat:       no-repeat;
+			background-position:     center center;
+			background-attachment:   fixed;
+			-webkit-background-size: cover;
+			-moz-background-size:    cover;
+			-o-background-size:      cover;
+			background-size:         cover;
+		}
+	</style>
+</head>
+<body>
+
+<button id="modal_button">Open Modal</button>
+<div id="page">
+	<div id="code_modal" class="modal">
+		<div class="modal-content">
+			<div class="hrule"></div>
+			<div class="vrule"></div>
+			<select name="lang" id="lang">
+				<option value="php">PHP</option>
+				<option value="javascript">JS</option>
+				<option value="css">CSS</option>
+				<option value="bash">Bash</option>
+			</select> <textarea name="code" id="code" cols="30" rows="10"></textarea>
+		</div>
+
+	</div>
+
+	<div class="window">
+		<div class="titlebar">
+			<div class="buttons">
+				<div class="close"><span class="closebutton"></span></div>
+				<div class="minimize"><span class="minimizebutton"></span></div>
+				<div class="zoom"><span class="zoombutton"></span></div>
+			</div>
+		</div>
+		<div class="content">
+			<pre class="code-block language-php"><code></code></pre>
+		</div>
+	</div>
+
+</div>
+
+</body>
+
+<script type="text/javascript">
+
+
+	// function getUrlVars() {
+	// 	var vars  = {};
+	// 	var parts = window.location.href.replace( /[?&]+([^=&]+)=([^&]*)/gi, function ( m, key, value ) {
+	// 		vars[ key ] = value;
+	// 	} );
+	// 	return vars;
+	// }
+
+	// function getUrlParam( parameter, defaultvalue ) {
+	// 	var urlparameter = defaultvalue;
+	// 	if ( window.location.href.indexOf( parameter ) > -1 ) {
+	// 		urlparameter = getUrlVars()[ parameter ];
+	// 	}
+	// 	return urlparameter;
+	// }
+	//
+	// var bg = getUrlParam( 'bg', 'null' );
+
+	//if ( bg === null ) {
+	var bg    = Math.floor( Math.random() * 10 ) + 1;
+	//}
+	var image = 'url(assets/backgrounds/background' + bg + '.jpg)';
+
+	document.getElementById( 'page' ).style.backgroundImage = image;
+
+	jQuery( document ).ready( function ( $ ) {
+		document.onkeydown = function ( event ) {
+			//console.log( event.which );
+
+			// n
+			if ( event.altKey && event.which === 78 ) {
+				$( '#code_modal' ).css( 'display', 'block' );
+				$( '#code' ).focus();
+			}
+
+			// enter
+			if ( event.altKey && event.which === 13 ) {
+				// Hide the popup.
+				$( '#code_modal' ).css( 'display', 'none' );
+				// remove the language classes
+				$( '.code-block, code' ).removeClass( function ( index, className ) {
+					return (className.match( /(^|\s)language-\S+/g ) || []).join( ' ' );
+				} );
+				// Get the selected language.
+				var lang = $( '#lang' ).val();
+				// Add the selected language class.
+				$( '.code-block, code' ).addClass( 'language-' + lang );
+				// Setup vars.
+				var code_el      = $( '#code' ),
+				    code         = code_el.val(),
+				    highlight_el = $( '.code-block code' );
+
+				// Replace 4 spaces with a tab
+				code = code.replace( /    +/g, '	' );
+				// Reset the textarea
+				code_el.val( '' );
+				// Place the escaped version in the code block.
+				highlight_el.text( code );
+				// Highlight it.
+				Prism.highlightElement( highlight_el[ 0 ] )
+			}
+
+			// esc key
+			if ( event.which === 27 ) {
+				$( '#code_modal' ).css( 'display', 'none' );
+			}
+
+			// alt+s Save the page as an image.
+			if ( event.altKey && event.which === 83 ) {
+				html2canvas( document.querySelector( "#page" ) ).then( canvas => {
+					document.body.appendChild( canvas );
+
+					canvas.toBlob( function ( blob ) {
+						saveAs( blob, "codeshot.jpg" );
+					} );
+				} );
+			}
+		};
+
+		$( "textarea" ).keydown( function ( e ) {
+			if ( e.keyCode === 9 ) { // tab was pressed
+				// get caret position/selection
+				var start = this.selectionStart;
+				var end   = this.selectionEnd;
+
+				var $this = $( this );
+
+				// set textarea value to: text before caret + tab + text after caret
+				$this.val( $this.val().substring( 0, start )
+					+ "\t"
+					+ $this.val().substring( end ) );
+
+				// put caret at right position again
+				this.selectionStart = this.selectionEnd = start + 1;
+
+				// prevent the focus lose
+				return false;
+			}
+		} );
+	} );
+
+</script>
+</html>

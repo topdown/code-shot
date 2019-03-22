@@ -1,0 +1,21 @@
+{
+  "name": "code-shot",
+  "version": "1.0.0",
+  "description": "A simple code snippet screenshot tool for posting to social networks.",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron ."
+  },
+  "repository": "",
+  "keywords": [
+    "code",
+    "socialcode",
+    "screenshot"
+  ],
+  "author": "Jeff Behnke",
+  "license": "",
+  "devDependencies": {
+    "electron": "^4.1.1"
+  },
+  "productName" : "Code Shot"
+}
