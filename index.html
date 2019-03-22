@@ -86,18 +86,41 @@
 
 <script type="text/javascript">
 
-	var bg         = Math.floor( Math.random() * 10 ) + 1;
-	var image      = 'url(assets/backgrounds/background' + bg + '.jpg)';
-	var test_image = new Image();
-	test_image.src = image;
+	function checkImageSrc( img ) {
+		var test_image = new Image();
 
-	if ( test_image.width === 0 ) {
-		// Notification??
-	} else {
-		document.getElementById( 'page' ).style.backgroundImage = image;
+		test_image.addEventListener( 'load', function () {
+			// execute drawImage statements here
+		}, false );
+
+		test_image.src = img;
+
+		if ( test_image.width === 0 ) {
+			return false
+		} else {
+			return true
+		}
 	}
 
+	var bg        = Math.floor( Math.random() * 10 ) + 1;
+	var image_url = 'assets/backgrounds/background' + bg + '.jpg';
+	var image     = 'url(' + image_url + ')';
+
 	jQuery( document ).ready( function ( $ ) {
+
+		$.ajax( {
+			url: image_url,
+			type: 'HEAD',
+			error: function () {
+				//file not exists
+				console.log( "Not Found " + image_url );
+			},
+			success: function () {
+				//file exists
+				document.getElementById( 'page' ).style.backgroundImage = image;
+			}
+		} );
+
 		document.onkeydown = function ( event ) {
 			//console.log( event.which );
 
